@@ -40,6 +40,12 @@ function! LoadConfig()
   if filereadable(s:chat_config_file)
     let l:config = json_decode(join(readfile(s:chat_config_file), "\n"))
     let s:default_model = l:config.model
+    " check if key prompts exists before assigning
+    if has_key(l:config, 'prompts')
+      let s:prompts = l:config.prompts
+    else
+      let s:prompts = {}
+    endif
     let s:prompts = l:config.prompts
   else
     let l:config = {'model': s:default_model}
