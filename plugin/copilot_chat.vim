@@ -98,8 +98,8 @@ function! CopilotChat()
   let s:chat_count += 1
   let s:chat_buffer = bufnr('%')
 
-  nnoremap <buffer> <leader>cs :SubmitChatMessage<CR>
-  nnoremap <buffer> <CR> :SubmitChatMessage<CR>
+  nnoremap <buffer> <leader>cs :CopilotSubmit<CR>
+  nnoremap <buffer> <CR> :CopilotSubmit<CR>
 
   syntax match CopilotWelcome /^Welcome to Copilot Chat!.*$/
   syntax match CopilotSeparatorIcon /^/
@@ -130,7 +130,7 @@ function! CopilotChat()
   endif
 endfunction
 
-function! SubmitChatMessage()
+function! CopilotSubmit()
   let l:separator_line = search(' ━\+$', 'nw')
   let l:start_line = l:separator_line + 1
   let l:end_line = line('$')
@@ -396,7 +396,7 @@ function! AddSelectionToChatBuffer()
 endfunction
 
 command! CopilotChat call CopilotChat()
-command! SubmitChatMessage call SubmitChatMessage()
+command! CopilotSubmit call CopilotSubmit()
 command! CopilotConfig call ViewConfig()
 command! CopilotModels call ViewModels()
 command! SelectModel call SelectModel()
