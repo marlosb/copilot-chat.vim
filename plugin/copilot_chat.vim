@@ -126,6 +126,23 @@ function! CopilotChat()
   normal! G
 endfunction
 
+function! CopilotAdd(filepath)
+  " Check if the file exists
+  if !filereadable(a:filepath)
+    echo "Error: File not found - " . a:filepath
+    return
+  endif
+
+  " Read the content of the file
+  let l:file_content = join(readfile(a:filepath), "\n")
+
+  " Set the content to a variable
+  let s:included_file_content = l:file_content
+
+  " Optional: Echo the content to confirm
+  echo "File content included successfully."
+endfunction
+
 function! CopilotSubmit()
   let l:separator_line = search(' ━\+$', 'nw')
   let l:start_line = l:separator_line + 1
@@ -392,6 +409,7 @@ function! AddSelectionToChatBuffer()
 endfunction
 
 command! CopilotChat call CopilotChat()
+command! -nargs=1 CopilotAdd call CopilotAdd(<f-args>
 command! CopilotSubmit call CopilotSubmit()
 command! CopilotConfig call ViewConfig()
 command! CopilotModels call ViewModels()
