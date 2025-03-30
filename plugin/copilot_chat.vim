@@ -324,10 +324,16 @@ function! AsyncRequest(message)
   call appendbufline(s:chat_buffer, '$', 'Waiting for response')
   let s:waiting_timer = timer_start(500, {-> UpdateWaitingDots()}, {'repeat': -1})
 
+   let l:fullmessage = a:message
+    if exists("s:included_file_content")
+      let s:context_message = "For context consider the code below:\n"
+      let l:fullmessage .= "\n" . s:context_message . s:included_file_content
+    endif
+
   " for knowledge bases its just an attachment as the content
   "{'content': '<attachment id="kb:Name">\n#kb:\n</attachment>', 'role': 'user'}
   " for files similar
-  let l:messages = [{'content': a:message, 'role': 'user'}]
+  let l:messages = [{'content': l:fullmessage, 'role': 'user'}]
   let l:data = json_encode({
         \ 'intent': v:false,
         \ 'model': s:default_model,
