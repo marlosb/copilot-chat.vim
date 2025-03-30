@@ -79,7 +79,8 @@ endfunction
 function! CopilotChat()
   call LoadConfig()
   call ConfirmSignin()
-  vsplit
+  " commenting out the vsplit command to not split screen 
+  " vsplit
   enew
   setlocal buftype=nofile
   setlocal bufhidden=hide
@@ -116,6 +117,11 @@ function! CopilotChat()
   call UserInputSeparator()
 
   normal! G
+
+  " Close the previous buffer if it exists
+  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
+    execute 'bwipeout' bufnr('#')
+  endif
 endfunction
 
 function! SubmitChatMessage()
