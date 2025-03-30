@@ -1,8 +1,8 @@
 ## Changes in my fork
-- Fixed bug when pre-defined prompts file was empty
-- Changed default open behaviour from CopilotChat commad to open on full screen (I use TMUX for window management and I prefer vim to be single full screen)
+- Fixed bug when pre-defined prompts file is empty
+- Changed default open behaviour from CopilotChat commad to open in full screen (I use TMUX for window management and I prefer vim to be single full screen per pane)
 - Changed function name from SubmitChatMessage to CopilotSubmit
-- Added function CopilotAdd: takes a file path as argument, import full content of this file and send it along with user input to add context for GitHub Copilot call
+- Added function CopilotAdd: takes a file path as argument, import full content of this file to send it along with user input as context for GitHub Copilot call
 
 User flow is:
 1. Type command `:CopilotChat` to open it
