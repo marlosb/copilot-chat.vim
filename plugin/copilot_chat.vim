@@ -87,6 +87,7 @@ function! CopilotChat()
   call ConfirmSignin()
   " commenting out the vsplit command to not split screen 
   " vsplit
+  silent! bd!
   enew
   setlocal buftype=nofile
   setlocal bufhidden=hide
@@ -123,11 +124,6 @@ function! CopilotChat()
   call UserInputSeparator()
 
   normal! G
-
-  " Close the previous buffer if it exists
-  if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
-    execute 'bwipeout' bufnr('#')
-  endif
 endfunction
 
 function! CopilotSubmit()
